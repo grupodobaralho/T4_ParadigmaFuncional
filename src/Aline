@@ -1,3 +1,7 @@
+(* Alunos: Israel Deorce e Vinicius Kroth 
+   Linguagem de Programação - 2017/2 *)
+
+(* Função para ler arquivos, removendo os \n*)
 fun readFile(filename) =
     let val file = TextIO.openIn filename
         val poem = TextIO.inputAll file
@@ -5,9 +9,20 @@ fun readFile(filename) =
     in String.tokens (fn c => c = #"\n") poem
     end
   
-val texto = readFile("Documento de teste.txt") 
- 
-fun concat (list) = foldr op^ "" list
- 
-val texto = concat(texto)
+(* Lendo o arquivo e concatenando *)
+val texto = readFile("H37Rv.txt"); 
+fun concat (list) = foldr op^ "" list; 
+val texto = concat(texto);
 
+(* Função para escrever em arquivos *)
+fun writeFile (filename : string , text: string) =
+    let val file = TextIO.openOut(filename)
+        val _ = TextIO.output(file, text)
+    in TextIO.closeOut(file)
+    end
+    
+(* lista de aminoacidos *)
+val aminoacidos = "G\nA\nV\nL\nI\nP\nS\nT\nC\nM\nD\nE\nF\nY\nW\nK\nR\nH\nN\nQ\n";
+
+(* chamando o writeFuke para escrever os aminoacidos no arquivo *)
+writeFile("aminoacidos.txt" ,aminoacidos);
