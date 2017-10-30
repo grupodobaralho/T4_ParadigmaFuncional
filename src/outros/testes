@@ -1,0 +1,66 @@
+datatype 'a  btree = Leaf of 'a
+                  | Node of 'a btree * 'a btree * 'a * 'a btree * 'a btree
+                  
+val myTree = Node (Leaf 9, "Begin", Node (Leaf 3, 5, Leaf 7))
+
+
+
+
+(* Even lists of lists of things *)
+fun amino GGG = "G" | amino GGA = "G" | amino GGC = "G" | amino GGT = "G" 
+  | amino GAG = "E" | amino GAA = "E" | amino GAC = "D" | amino GAT = "D"
+  | amino GCG = "A" | amino GCA = "A" | amino GCC = "A" | amino GCT = "A"
+  | amino GTG = "V" | amino GTA = "V" | amino GTC = "V" | amino GTT = "V"
+  
+  | amino AGG = "R" | amino AGA = "R" | amino AGC = "S" | amino AGT = "S" 
+  | amino AAG = "A" | amino AAA = "A" | amino AAC = "N" | amino AAT = "N"
+  | amino ACG = "T" | amino ACA = "T" | amino ACC = "T" | amino ACT = "T"
+  | amino ATG = "M" | amino ATA = "I" | amino ATC = "I" | amino ATT = "I"
+  
+  | amino CGG = "W" | amino CGA = "STOP" | amino CGC = "C" | amino CGT = "C" 
+  | amino CAG = "STOP" | amino CAA = "STOP" | amino CAC = "Y" | amino CAT = "Y"
+  | amino CCG = "S" | amino CCA = "S" | amino CCC = "S" | amino CCT = "S"
+  | amino CTG = "L" | amino CTA = "L" | amino CTC = "F" | amino CTT = "F"
+  
+  | amino TAG = "R" | amino TAA = "R" | amino TAC = "R" | amino TAT = "R"
+  | amino TAG = "Q" | amino TAA = "Q" | amino TAC = "H" | amino TAT = "H"
+  | amino TAG = "P" | amino TAA = "P" | amino TAC = "P" | amino TAT = "P"
+  | amino TAG = "L" | amino TAA = "L" | amino TAC = "L" | amino TAT = "L"
+  
+   amino(GAG);
+ 
+ 
+ datatype color = Red | Green | Blue
+
+ fun say Red   = "You are red!"
+  | say Green = "You are green!"
+  | say Blue  = "You are blue!"
+  
+val oi = "Red";
+say oi;
+  
+	     { G={
+                    G={G="G", A="G", C="G", T="G"}
+                  , A={G="E", A="E", C="D", T="D"}
+                  , C={G="A", A="A", C="A", T="A"}
+                  , T={G="V", A="V", C="V", T="V"}
+	       }
+	     , A={
+                    G={G="R", A="R", C="S", T="S"}
+                  , A={G="A", A="A", C="N", T="N"}
+                  , C={G="T", A="T", C="T", T="T"}
+                  , T={G="M", A="I", C="I", T="I"}
+	       }
+	     , T={
+                    G={G="W", A="STOP", C="C", T="C"}
+                  , A={G="STOP", A="STOP", C="Y", T="Y"}
+                  , C={G="S", A="S", C="S", T="S"}
+                  , T={G="L", A="L", C="F", T="F"}
+	       }
+	     , C={
+                    G={G="R", A="R", C="R", T="R"}
+                  , A={G="Q", A="Q", C="H", T="H"}
+                  , C={G="P", A="P", C="P", T="P"}
+                  , T={G="L", A="L", C="L", T="L"}
+	       }	     
+	     };

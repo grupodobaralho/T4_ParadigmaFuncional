@@ -1,0 +1,38 @@
+val arvore = [ [
+                    ["G", "G", "G", "G"]
+                  , ["E", "E", "D", "D"]
+                  , ["A", "A", "A", "A"]
+                  , ["V", "V", "V", "V"]
+	       ]
+	     , [
+                    ["R", "R", "S", "S"]
+                  , ["A", "A", "N", "N"]
+                  , ["T", "T", "T", "T"]
+                  , ["M", "I", "I", "I"]
+	       ]
+	     , [
+                    ["W", "STOP", "C", "C"]
+                  , ["STOP", "STOP", "Y", "Y"]
+                  , ["S", "S", "S", "S"]
+                  , ["L", "L", "F", "F"]
+	       ]
+	     , [
+                    ["R", "R", "R", "R"]
+                  , ["Q", "Q", "H", "H"]
+                  , ["P", "P", "P", "P"]
+                  , ["L", "L", "L", "L"]
+	       ]	     
+	     ];
+	     
+fun acha (xs, lista) = 
+	if String.equal(x::xs,"D") then true else false
+
+val listaloca = ["A","B","C", "D"];
+acha(listaloca, arvore);
+
+
+
+
+
+
+
