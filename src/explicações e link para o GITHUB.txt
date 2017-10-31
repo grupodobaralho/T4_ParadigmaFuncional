@@ -1,0 +1,60 @@
+Olá professor Marco Mangan,
+
+Este texto foi enviado via e-mail para relatar a nossa dificuldade com o desenvolvimento do trabalho 4 proposto na disciplina. 
+
+Eu e o Vinicius passamos os últimos dias da semana e o final de semana tentando encontrar uma forma de armazenar as bases em uma sequência que permitisse encontrar o aminoácido correspondente, mas infelizmente ainda não conseguimos encontrar uma solução que funcione bem para o que é pedido no trabalho.
+
+Abaixo listo as nossas diferentes tentativas:
+------------
+
+1- Implementação de uma estrutura de árvore.
+
+Apesar das buscas na internet ou nas fontes de pesquisa apresentadas, só encontramos referências para árvores binárias de pesquisa, que não servem para este trabalho.
+Simplesmente não conseguimos adaptar uma árvore cujos nodos não-folhas possuam quatro filhos diferentes.
+
+2- HashTable
+
+Outra solução que tentamos foi utilizar uma HashTable, passando como chave uma string (as três bases) que retornariam o aminoácido referente. Buscamos em várias bibliotécas que implementavam uma HashTable, mas ao importarmos, todas apresentavam erros que não conseguiamos solucionar. 
+A fonte que chegou mais perto de nos servir foi esta:
+http://www.cs.cornell.edu/courses/cs312/2002sp/handouts/sml-nj-library.htm
+
+3- Records
+
+Outra tentativa que quase deu certo, foi a de utilizar Records, que são tuplas com slots nomeados.  Abaixo, apresento parte da nossa tentativa de implementação:
+
+val record = { 
+                G={
+                    G={G="G", A="G", C="G", T="G"}
+                  , A={G="E", A="E", C="D", T="D"}
+                  , C={G="A", A="A", C="A", T="A"}
+                  , T={G="V", A="V", C="V", T="V"}
+	       }
+	     , A={
+                    G={G="R", A="R", C="S", T="S"}
+                  , A={G="A", A="A", C="N", T="N"}
+                  , C={G="T", A="T", C="T", T="T"}
+                  , T={G="M", A="I", C="I", T="I"}
+	       }
+	     , T={
+               ...
+
+Se fizermos a chamada deste forma:
+
+#G (#C (#T record)) 
+
+por exemplo, retornará a string "A". O problema desta solução, é que não conseguimos montar uma função que receba três bases e consiga substituir os #G, #A, etc...
+
+Ex:
+fun achabase (b1:string, b2:string, b3:string) #b1 (#b2 (#b3 arvore));  
+
+Esta função não funciona, pois b1,b2 e b3 são strings e não os tipos específicos que o record aceita.
+
+------------
+
+Segue o link para o nosso repositório no GitHub:
+
+https://github.com/IsraelDeorce/T4_ParadigmaFuncional
+
+
+Alunos:
+Israel Deorce e Vinicius Kroth

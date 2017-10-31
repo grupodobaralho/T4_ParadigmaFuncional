@@ -26,47 +26,21 @@ val aminoacidos = "G\nA\nV\nL\nI\nP\nS\nT\nC\nM\nD\nE\nF\nY\nW\nK\nR\nH\nN\nQ\n"
 
 (* chamando o writeFuke para escrever os aminoacidos no arquivo *)
 writeFile("aminoacidos.txt" ,aminoacidos);
-
-(* Even lists of lists of things *)
-val arvore = { G={
-                    G={G="G", A="G", C="G", T="G"}
-                  , A={G="E", A="E", C="D", T="D"}
-                  , C={G="A", A="A", C="A", T="A"}
-                  , T={G="V", A="V", C="V", T="V"}
-	       }
-	     , A={
-                    G={G="R", A="R", C="S", T="S"}
-                  , A={G="A", A="A", C="N", T="N"}
-                  , C={G="T", A="T", C="T", T="T"}
-                  , T={G="M", A="I", C="I", T="I"}
-	       }
-	     , T={
-                    G={G="W", A="STOP", C="C", T="C"}
-                  , A={G="STOP", A="STOP", C="Y", T="Y"}
-                  , C={G="S", A="S", C="S", T="S"}
-                  , T={G="L", A="L", C="F", T="F"}
-	       }
-	     , C={
-                    G={G="R", A="R", C="R", T="R"}
-                  , A={G="Q", A="Q", C="H", T="H"}
-                  , C={G="P", A="P", C="P", T="P"}
-                  , T={G="L", A="L", C="L", T="L"}
-	       }	     
-	     };
 	     
 	  
-
-fun identifica_aminoacido {b1 : string, b2 : string, b3 : string} = ;
-		
-fun identifica_aminoacido (b1 : string, b2 : string, b3 : string) = #b1 (#b (#G arvore));
-
-val nivel3 = #b3 nivel2(val nivel2 = #b2 nivel1(val nivel1 = #b1 arvore))
-	
-identifica_aminoacido("G","A","A")
-
-(* funciona *)
-#G (#G (#G arvore));
+(* achando base. Não ficou muito bom pois não conseguimos implementar uma estrutura eficiente LER EXPLICAÇÃO *)
+fun amino(base: string)=  if String.equal(base, "GGG") orelse String.equal(base, "GGA") orelse String.equal(base, "GGC") orelse String.equal(base, "GGT") then "G" else if  String.equal(base, "GAG") orelse String.equal(base, "GAA") 
+then "E" else if  String.equal(base, "GAC")  orelse String.equal(base, "GAT") then "D" else if String.equal(base, "GCG") orelse String.equal(base, "GCA") orelse String.equal(base, "GCC") orelse String.equal(base, "GCT")
+orelse String.equal(base, "AAG") orelse String.equal(base, "AAA") then "A" else if String.equal(base, "CTG") orelse String.equal(base, "GTA") orelse String.equal(base, "GTC") orelse String.equal(base, "GTT") then "V" else if
+String.equal(base, "AGG") orelse String.equal(base, "AGA") orelse String.equal(base, "CGG") orelse String.equal(base, "CGA") orelse String.equal(base, "CGC") orelse String.equal(base, "CGT") then "R" else if 
+String.equal(base, "AGC") orelse String.equal(base, "AGT") orelse String.equal(base, "TCG") orelse String.equal(base, "TCA") orelse String.equal(base, "TCC") orelse String.equal(base, "TCT") then "S" else if
+String.equal(base, "AAC") orelse String.equal(base, "AAT") then "N" else if String.equal(base, "ACG") orelse String.equal(base, "ACA") orelse String.equal(base, "ACC") orelse String.equal(base, "ACT") then "T" else if
+String.equal(base, "ATG") then "M" else if String.equal(base, "ATA") orelse String.equal(base, "ATC") orelse String.equal(base, "ATT") then "I" else if String.equal(base, "CAG") orelse String.equal(base, "CAA") then "Q" else if
+String.equal(base, "CAC") orelse String.equal(base, "CAT") then "H" else if String.equal(base, "CCG") orelse String.equal(base, "CCA") orelse String.equal(base, "CCC") orelse String.equal(base, "CCT") then "P" else if
+String.equal(base, "CTG") orelse String.equal(base, "CTA") orelse String.equal(base, "CTC") orelse String.equal(base, "CTT") orelse String.equal(base, "TTG") orelse String.equal(base, "TTA") then "L" else if 
+String.equal(base, "TGG") then "W" else if String.equal(base, "TGC") orelse String.equal(base, "TGT") then "C" else if String.equal(base, "TAC")orelse String.equal(base, "TAT")  then "Y" else if 
+String.equal(base, "TTC") orelse String.equal(base, "TTT") then "F" else "STOP"
                
-               
+amino("CAC")               
                
         
