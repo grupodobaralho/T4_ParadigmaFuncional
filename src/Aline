@@ -1,7 +1,7 @@
 (* Alunos: Israel Deorce e Vinicius Kroth 
    Linguagem de Programação - 2017/2 *)
 
-(* Função para ler arquivos, removendo os \n*)
+(*(a) Função para ler arquivos, removendo os \n*)
 fun readFile(filename) =
     let val file = TextIO.openIn filename
         val poem = TextIO.inputAll file
@@ -21,26 +21,54 @@ fun writeFile (filename : string , text: string) =
     in TextIO.closeOut(file)
     end
     
-(* lista de aminoacidos *)
-val aminoacidos = "G\nA\nV\nL\nI\nP\nS\nT\nC\nM\nD\nE\nF\nY\nW\nK\nR\nH\nN\nQ\n";
+(* Lista de Aminoacidos *)
+val aminoacidos = "Met T G L L D G K R I L V S G I I T D S S I A F H I A R V A Q E Q G A Q L V L T G F D R L R L I Q R I T D R L P A K A P L L E L D V Q N E E H L A S L A G R V T E A I G A G N K L D G V V H S I G F Met P Q T G Met G I N P F F D A P Y A D V S K G I H I S A Y S Y A S Met A K A L L P I Met N P G G S I V G Met D F D P S R A Met P A Y N W Met T V A K S A L E S V N R F V A R E A G K Y G V R S N L V A A G P I R T L A Met S A I V G G A L G E E A G A Q I Q L L E E G W D Q R A P I G W N Met K D A T P V A K T V C A L L S D W L P A T T G D I I Y A D G G A H T Q L L Stop";
 
-(* chamando o writeFuke para escrever os aminoacidos no arquivo *)
+(*(b) Chamando o writeFuke para escrever os aminoacidos no arquivo *)
 writeFile("aminoacidos.txt" ,aminoacidos);
-	     
+	
+(*(c) Transformando a string em uma lista de chars*)
+val listaChars = String.explode texto;  
+
+(* Transformando a lista de chars em uma lista de strings de 3 em 3*)
+fun fazListaBases (x::y::z::xs) = if List.length xs < 3 
+	then String.implode([x, y, z]) :: fazListaBases([])
+	else String.implode([x, y, z]) :: fazListaBases(xs)
+  | fazListaBases [] = [];   
+
+val baseZero = fazListaBases (listaChars);
 	  
-(* achando base. Não ficou muito bom pois não conseguimos implementar uma estrutura eficiente LER EXPLICAÇÃO *)
-fun amino(base: string)=  if String.equal(base, "GGG") orelse String.equal(base, "GGA") orelse String.equal(base, "GGC") orelse String.equal(base, "GGT") then "G" else if  String.equal(base, "GAG") orelse String.equal(base, "GAA") 
-then "E" else if  String.equal(base, "GAC")  orelse String.equal(base, "GAT") then "D" else if String.equal(base, "GCG") orelse String.equal(base, "GCA") orelse String.equal(base, "GCC") orelse String.equal(base, "GCT")
-orelse String.equal(base, "AAG") orelse String.equal(base, "AAA") then "A" else if String.equal(base, "CTG") orelse String.equal(base, "GTA") orelse String.equal(base, "GTC") orelse String.equal(base, "GTT") then "V" else if
-String.equal(base, "AGG") orelse String.equal(base, "AGA") orelse String.equal(base, "CGG") orelse String.equal(base, "CGA") orelse String.equal(base, "CGC") orelse String.equal(base, "CGT") then "R" else if 
-String.equal(base, "AGC") orelse String.equal(base, "AGT") orelse String.equal(base, "TCG") orelse String.equal(base, "TCA") orelse String.equal(base, "TCC") orelse String.equal(base, "TCT") then "S" else if
-String.equal(base, "AAC") orelse String.equal(base, "AAT") then "N" else if String.equal(base, "ACG") orelse String.equal(base, "ACA") orelse String.equal(base, "ACC") orelse String.equal(base, "ACT") then "T" else if
-String.equal(base, "ATG") then "M" else if String.equal(base, "ATA") orelse String.equal(base, "ATC") orelse String.equal(base, "ATT") then "I" else if String.equal(base, "CAG") orelse String.equal(base, "CAA") then "Q" else if
-String.equal(base, "CAC") orelse String.equal(base, "CAT") then "H" else if String.equal(base, "CCG") orelse String.equal(base, "CCA") orelse String.equal(base, "CCC") orelse String.equal(base, "CCT") then "P" else if
-String.equal(base, "CTG") orelse String.equal(base, "CTA") orelse String.equal(base, "CTC") orelse String.equal(base, "CTT") orelse String.equal(base, "TTG") orelse String.equal(base, "TTA") then "L" else if 
-String.equal(base, "TGG") then "W" else if String.equal(base, "TGC") orelse String.equal(base, "TGT") then "C" else if String.equal(base, "TAC")orelse String.equal(base, "TAT")  then "Y" else if 
-String.equal(base, "TTC") orelse String.equal(base, "TTT") then "F" else "STOP"
-               
-amino("CAC")               
+val amino = (fn base => 
+	if String.equal(base, "GGG") orelse String.equal(base, "GGA") orelse String.equal(base, "GGC") orelse String.equal(base, "GGT") then "G" 
+	else if String.equal(base, "GAG") orelse String.equal(base, "GAA") then "E" 
+	else if String.equal(base, "GAC") orelse String.equal(base, "GAT") then "D" 
+	else if String.equal(base, "GCG") orelse String.equal(base, "GCA") orelse String.equal(base, "GCC") orelse String.equal(base, "GCT") then "A" 
+	else if String.equal(base, "GTG") orelse String.equal(base, "GTA") orelse String.equal(base, "GTC") orelse String.equal(base, "GTT") then "V" 
+	
+	else if String.equal(base, "AGG") orelse String.equal(base, "AGA") then "R"
+	else if String.equal(base, "AGC") orelse String.equal(base, "AGT") then "S"
+	else if String.equal(base, "AAG") orelse String.equal(base, "AAA") then "K"
+	else if String.equal(base, "AAC") orelse String.equal(base, "AAT") then "N"	 
+	else if String.equal(base, "ACG") orelse String.equal(base, "ACA") orelse String.equal(base, "ACC") orelse String.equal(base, "ACT") then "T" 
+	else if String.equal(base, "ATG") then "Met" 
+	else if String.equal(base, "ATA") orelse String.equal(base, "ATC") orelse String.equal(base, "ATT") then "I" 
+	
+	else if String.equal(base, "CGG") orelse String.equal(base, "CGA") orelse String.equal(base, "CGC") orelse String.equal(base, "CGT") then "R"
+	else if String.equal(base, "CAG") orelse String.equal(base, "CAA") then "Q" 
+	else if String.equal(base, "CAC") orelse String.equal(base, "CAT") then "H" 
+	else if String.equal(base, "CCG") orelse String.equal(base, "CCA") orelse String.equal(base, "CCC") orelse String.equal(base, "CCT") then "P" 
+	else if String.equal(base, "CTG") orelse String.equal(base, "CTA") orelse String.equal(base, "CTC") orelse String.equal(base, "CTT") then "L"
+	
+	else if String.equal(base, "TGG") then "W" 
+	else if String.equal(base, "TGA") then "STOP" 
+	else if String.equal(base, "TGC") orelse String.equal(base, "TGT") then "C" 
+	else if String.equal(base, "TAG") orelse String.equal(base, "TAA")  then "STOP" 
+	else if String.equal(base, "TAC") orelse String.equal(base, "TAT")  then "Y"
+	else if String.equal(base, "TCG") orelse String.equal(base, "TCA") orelse String.equal(base, "TCC") orelse String.equal(base, "TCT") then "S" 
+	else if String.equal(base, "TTG") orelse String.equal(base, "TTA") then "L"
+	else if String.equal(base, "TTC") orelse String.equal(base, "TTT") then "F"
+	else "Erro: Base nao identificada");
+	
+val aminoBaseZero = List.map amino baseZero;    
                
         
