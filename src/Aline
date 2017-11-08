@@ -36,7 +36,16 @@ fun fazListaBases (x::y::z::xs) = if List.length xs < 3
 	else String.implode([x, y, z]) :: fazListaBases(xs)
   | fazListaBases [] = [];   
 
+(*(d) Transformando tres listas de bases 0, 1 e 2 *)
 val baseZero = fazListaBases (listaChars);
+val baseUm = fazListaBases(tl listaChars);
+val baseDois = fazListaBases(tl (tl listaChars));
+
+(* Transformando tres listas de bases 0, 1 e 2 invertidas *)
+val listaCharsI = rev listaChars;
+val baseZeroI = fazListaBases (listaCharsI);
+val baseUmI = fazListaBases(tl listaCharsI);
+val baseDoisI = fazListaBases(tl (tl listaCharsI));
 	  
 val amino = (fn base => 
 	if String.equal(base, "GGG") orelse String.equal(base, "GGA") orelse String.equal(base, "GGC") orelse String.equal(base, "GGT") then "G" 
@@ -45,7 +54,7 @@ val amino = (fn base =>
 	else if String.equal(base, "GCG") orelse String.equal(base, "GCA") orelse String.equal(base, "GCC") orelse String.equal(base, "GCT") then "A" 
 	else if String.equal(base, "GTG") orelse String.equal(base, "GTA") orelse String.equal(base, "GTC") orelse String.equal(base, "GTT") then "V" 
 	
-	else if String.equal(base, "AGG") orelse String.equal(base, "AGA") then "R"
+	else if String.equal(base, "AGG") orelse String.equal(base, "AGA") then "R"
 	else if String.equal(base, "AGC") orelse String.equal(base, "AGT") then "S"
 	else if String.equal(base, "AAG") orelse String.equal(base, "AAA") then "K"
 	else if String.equal(base, "AAC") orelse String.equal(base, "AAT") then "N"	 
@@ -69,6 +78,10 @@ val amino = (fn base =>
 	else if String.equal(base, "TTC") orelse String.equal(base, "TTT") then "F"
 	else "Erro: Base nao identificada");
 	
-val aminoBaseZero = List.map amino baseZero;    
-               
+val aminoBaseZero = List.map amino baseZero;
+val aminoBaseUm = List.map amino baseUm;
+val aminoBaseDois = List.map amino baseDois;
+val aminoBaseZeroI = List.map amino baseZeroI;
+val aminoBaseUmI = List.map amino baseUmI;
+val aminoBaseDoisI = List.map amino baseDoisI;            
         
