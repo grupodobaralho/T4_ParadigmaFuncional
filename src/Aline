@@ -46,7 +46,8 @@ val listaCharsI = rev listaChars;
 val baseZeroI = fazListaBases (listaCharsI);
 val baseUmI = fazListaBases(tl listaCharsI);
 val baseDoisI = fazListaBases(tl (tl listaCharsI));
-	  
+
+(* Função para identificar o Aminoácido correspondente a base *) 
 val amino = (fn base => 
 	if String.equal(base, "GGG") orelse String.equal(base, "GGA") orelse String.equal(base, "GGC") orelse String.equal(base, "GGT") then "G" 
 	else if String.equal(base, "GAG") orelse String.equal(base, "GAA") then "E" 
@@ -54,7 +55,7 @@ val amino = (fn base =>
 	else if String.equal(base, "GCG") orelse String.equal(base, "GCA") orelse String.equal(base, "GCC") orelse String.equal(base, "GCT") then "A" 
 	else if String.equal(base, "GTG") orelse String.equal(base, "GTA") orelse String.equal(base, "GTC") orelse String.equal(base, "GTT") then "V" 
 	
-	else if String.equal(base, "AGG") orelse String.equal(base, "AGA") then "R"
+	else if String.equal(base, "AGG") orelse String.equal(base, "AGA") then "R"
 	else if String.equal(base, "AGC") orelse String.equal(base, "AGT") then "S"
 	else if String.equal(base, "AAG") orelse String.equal(base, "AAA") then "K"
 	else if String.equal(base, "AAC") orelse String.equal(base, "AAT") then "N"	 
@@ -77,11 +78,49 @@ val amino = (fn base =>
 	else if String.equal(base, "TTG") orelse String.equal(base, "TTA") then "L"
 	else if String.equal(base, "TTC") orelse String.equal(base, "TTT") then "F"
 	else "Erro: Base nao identificada");
-	
+
+(* Encontrando as 6 sequencias de aminoácidos diferentes*)	
 val aminoBaseZero = List.map amino baseZero;
 val aminoBaseUm = List.map amino baseUm;
 val aminoBaseDois = List.map amino baseDois;
 val aminoBaseZeroI = List.map amino baseZeroI;
 val aminoBaseUmI = List.map amino baseUmI;
-val aminoBaseDoisI = List.map amino baseDoisI;            
-        
+val aminoBaseDoisI = List.map amino baseDoisI;  
+
+(* Função para comprar as sequencias das diferentes listas e escolhe a maior*)
+fun compare(x, x1, x2, x3 , x4 , x5) =
+if List.length( x ) >= List.length( x1 ) andalso List.length( x ) >= List.length( x2) andalso List.length( x ) >= List.length( x3) andalso List.length( x ) >=  List.length( x4) andalso List.length( x ) >= List.length( x5) then x else
+if List.length( x1 ) >= List.length( x ) andalso List.length( x1 ) >= List.length( x2) andalso List.length( x1 ) >= List.length( x3) andalso List.length( x1 ) >=  List.length ( x4) andalso List.length( x1 ) >= List.length( x5) then x1 else
+if List.length( x2 ) >= List.length( x ) andalso List.length( x2 ) >= List.length( x1) andalso List.length( x2 ) >= List.length( x3) andalso List.length( x2 ) >= List.length( x4 ) andalso List.length( x2 ) >= List.length( x5) then x2 else
+if List.length( x3 ) >= List.length( x1 ) andalso List.length( x3 ) >= List.length( x) andalso List.length( x3 ) >= List.length( x2) andalso List.length( x ) >= List.length( x4)andalso List.length( x ) >= List.length( x5) then x3 else
+if  List.length( x4 ) >= List.length( x1 ) andalso List.length( x4 ) >= List.length( x2) andalso List.length( x4 ) >= List.length( x3) andalso List.length( x4) >= List.length( x) andalso List.length( x4 ) >= List.length( x5) then x4 else
+x5 
+;
+
+(* Função auxiliar que acha um Stop *)
+fun findStop [] = []
+ | findStop ( x::xs ) = 
+ if( String.equal( x, "Stop" ) ) then []
+ else x::findStop( xs )
+ 
+(* Função auxiliar que acha um Met *)
+fun findMet [] = []
+ | findMet ( s::xs ) = if( String.equal( s, "Met" ) ) then if( List.length( "Met"::findStop( xs ) ) > List.length( findMet( xs ) ) )
+ then "Met"::findStop( xs )else findMet(xs)
+ else findMet(xs)
+;
+
+(* Função Principal que recebe as listas e encontra a maior sequencia Met até Stop *)
+fun metToStop( s0, s1, s2, s3, s4, s5) = 
+ let 
+ val x = findMet(s0)  val x1 = findMet(s1) val x2 = findMet(s2)
+ val x3 = findMet(s3) val x4 = findMet(s4) val x5 = findMet(s5)
+ val return = (compare(x ,x1,x2, x3, x4, x5))
+ in return
+ end  
+ ; 
+ 
+(* Gravando a maior sequencia Met até Stop em um arquivo de saída *)
+val maiorSeq = metToStop(aminoBaseZero,  aminoBaseUm, aminoBaseDois, aminoBaseZeroI, aminoBaseUmI , aminoBaseDoisI);
+val resultadoFinal = String.concat maiorSeq;
+writeFile("maiorSeq.txt" ,resultado);  
