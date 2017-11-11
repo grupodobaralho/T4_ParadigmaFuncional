@@ -1,5 +1,32 @@
 (* Alunos: Israel Deorce e Vinicius Kroth 
-   Linguagem de Programação - 2017/2 *)
+   Linguagem de Programação - 2017/2 
+   
+Link para o Repositório privado no GitHub:
+https://github.com/IsraelDeorce/T4_ParadigmaFuncional
+
+Referências consultadas:
+
+1- The Standard ML Basis Library, AT&T and Lucent Technologies, Cambridge University, 2004
+	The STRING signature
+		http://sml-family.org/Basis/string.html
+	The List structure
+		http://sml-family.org/Basis/list.html
+
+2- Learn X in Y minutes, Simon Shine, 2017
+	https://learnxinyminutes.com/docs/standard-ml/
+  
+3- Linguagens de Programação, Parte A, Couursera.org, Dan Grossman, 
+	https://www.coursera.org/learn/programming-languages
+	https://www.youtube.com/watch?v=LTDmMI4VSCM
+
+4- Programming in Standard ML '97: An On-line Tutorial, Stephen Gilmore,
+	University of Edinburgh, 1997
+	http://homepages.inf.ed.ac.uk/stg/NOTES/
+		
+5- Milner, Robin; Tofte, Mads; Harper, Robert; MacQueen, David (1997). 
+	The Definition of Standard ML (Revised)
+	
+*)
 
 (*(a) Função para ler arquivos, removendo os \n*)
 fun readFile(filename) =
@@ -110,7 +137,7 @@ fun findMet [] = []
  else findMet(xs)
 ;
 
-(* Função Principal que recebe as listas e encontra a maior sequencia Met até Stop *)
+(* (e) Função Principal que recebe as listas e encontra a maior sequencia Met até Stop *)
 fun metToStop( s0, s1, s2, s3, s4, s5) = 
  let 
  val x = findMet(s0)  val x1 = findMet(s1) val x2 = findMet(s2)
@@ -123,4 +150,4 @@ fun metToStop( s0, s1, s2, s3, s4, s5) =
 (* Gravando a maior sequencia Met até Stop em um arquivo de saída *)
 val maiorSeq = metToStop(aminoBaseZero,  aminoBaseUm, aminoBaseDois, aminoBaseZeroI, aminoBaseUmI , aminoBaseDoisI);
 val resultadoFinal = String.concat maiorSeq;
-writeFile("maiorSeq.txt" ,resultado);  
+writeFile("maiorSeq.txt" ,resultadoFinal);  
